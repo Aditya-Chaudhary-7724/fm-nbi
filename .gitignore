@@ -34,3 +34,5 @@ build/
 
 *.log
 .DS_Store
+
+!target/*.jar
