@@ -5,7 +5,6 @@ import com.nms.fm.repository.FaultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,7 +14,6 @@ public class FaultService {
     private FaultRepository faultRepository;
 
     public Fault createFault(Fault fault) {
-        fault.setTimestamp(LocalDateTime.now());
         return faultRepository.save(fault);
     }
 
@@ -23,10 +21,18 @@ public class FaultService {
         return faultRepository.findAll();
     }
 
-    public Fault updateFaultStatus(Long id, String status) {
-        Fault fault = faultRepository.findById(id).orElseThrow();
-        fault.setStatus(status);
-        return faultRepository.save(fault);
+    public Fault getFaultById(Long id) {
+        return faultRepository.findById(id).orElse(null);
+    }
+
+    public Fault updateFault(Long id, Fault updatedFault) {
+        Fault fault = faultRepository.findById(id).orElse(null);
+        if (fault != null) {
+            fault.setStatus(updatedFault.getStatus());
+            fault.setName(updatedFault.getName());
+            return faultRepository.save(fault);
+        }
+        return null;
     }
 
     public void deleteFault(Long id) {

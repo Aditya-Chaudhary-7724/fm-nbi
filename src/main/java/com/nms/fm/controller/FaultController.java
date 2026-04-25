@@ -8,29 +8,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/faults")
+@RequestMapping("/api/faults")   // 🔥 Base URL
 public class FaultController {
 
     @Autowired
     private FaultService faultService;
 
+    // ✅ CREATE
     @PostMapping
     public Fault createFault(@RequestBody Fault fault) {
         return faultService.createFault(fault);
     }
 
+    // ✅ READ ALL
     @GetMapping
     public List<Fault> getAllFaults() {
         return faultService.getAllFaults();
     }
 
-    @PutMapping("/{id}")
-    public Fault updateFault(@PathVariable Long id, @RequestParam String status) {
-        return faultService.updateFaultStatus(id, status);
+    // ✅ READ BY ID
+    @GetMapping("/{id}")
+    public Fault getFaultById(@PathVariable Long id) {
+        return faultService.getFaultById(id);
     }
 
+    // ✅ UPDATE
+    @PutMapping("/{id}")
+    public Fault updateFault(@PathVariable Long id, @RequestBody Fault fault) {
+        return faultService.updateFault(id, fault);
+    }
+
+    // ✅ DELETE
     @DeleteMapping("/{id}")
-    public void deleteFault(@PathVariable Long id) {
+    public String deleteFault(@PathVariable Long id) {
         faultService.deleteFault(id);
+        return "Deleted Successfully";
     }
 }
