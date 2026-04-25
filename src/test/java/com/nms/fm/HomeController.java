@@ -1,4 +1,4 @@
-package com.nms.fm;  // same as your main package
+package com.nms.fm;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
