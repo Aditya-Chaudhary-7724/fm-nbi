@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/faults
+Content-Type: application/json
+
+{
+  "alarmId": "A101",
+  "severity": "CRITICAL",
+  "description": "Server Down",
+  "status": "ACTIVE"
+}
