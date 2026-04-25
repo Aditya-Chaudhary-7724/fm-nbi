@@ -28,8 +28,10 @@ public class FaultService {
     public Fault updateFault(Long id, Fault updatedFault) {
         Fault fault = faultRepository.findById(id).orElse(null);
         if (fault != null) {
+            fault.setAlarmId(updatedFault.getAlarmId());
+            fault.setSeverity(updatedFault.getSeverity());
+            fault.setDescription(updatedFault.getDescription());
             fault.setStatus(updatedFault.getStatus());
-            fault.setName(updatedFault.getName());
             return faultRepository.save(fault);
         }
         return null;
